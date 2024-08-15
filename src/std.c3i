@@ -1,2 +1,0 @@
-module std::core::string;
-distinct ZString = inline char*;

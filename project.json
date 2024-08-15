@@ -36,7 +36,8 @@
   "target": "elf-aarch64",
   "reloc": "PIE",
   "no-entry": true,
-  "use-stdlib": false,
+  // "use-stdlib": false,
+  // "link-libc": false,
   // Targets.
   "targets": {
     "nswitch": {

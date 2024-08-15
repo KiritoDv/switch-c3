@@ -4,6 +4,7 @@
 // Originally created Kenta @ https://github.com/Its-Kenta
 
 module sdl;
+import std::io;
 
 const uint INIT_TIMER = 0x00000001u;
 const uint INIT_AUDIO = 0x00000010u;
@@ -100,17 +101,17 @@ struct RWops
 		// 	void *asset;
 		// } Android not yet supported in C3
 
-		// struct windowsio @if(env::WIN32)
-		// {
-		// 	bool append;
-		// 	void *h;
-		// 	struct buffer
-		// 	{
-		// 		void *data;
-		// 		usz size;
-		// 		usz left;
-		// 	}
-		// }
+		struct windowsio @if(env::WIN32)
+		{
+			bool append;
+			void *h;
+			struct buffer
+			{
+				void *data;
+				usz size;
+				usz left;
+			}
+		}
 
 		struct stdio
 		{
@@ -2512,7 +2513,7 @@ def TlsDestructor = fn void(void*);
 fn int tlsSet(TlSID id, void* value, TlsDestructor* destructor) @extern("SDL_TLSSet");
 fn void* tlsCleanup() @extern("SDL_TLSCleanup");
 fn RWops rwFromFile(char file, char* mode) @extern("SDL_RWFromFile");
-// fn RWops* rwFromFP(File* fp, bool autoclose) @extern("SDL_RWFromFP");
+fn RWops* rwFromFP(File* fp, bool autoclose) @extern("SDL_RWFromFP");
 fn RWops rwFromMem(void* mem, int size) @extern("SDL_RWFromMem");
 fn RWops rwFromConstMem(void* mem, int size) @extern("SDL_RWFromConstMem");
 fn RWops* allocRW() @extern("SDL_AllocRW");
@@ -3116,7 +3117,7 @@ fn int renderDrawLine(Renderer* renderer, int x1, int y1, int x2, int y2) @exter
 fn int renderDrawLines(Renderer* renderer, Point* points, int count) @extern("SDL_RenderDrawLines");
 fn int renderDrawRect(Renderer* renderer, Rect rect) @extern("SDL_RenderDrawRect");
 fn int renderDrawRects(Renderer* renderer, Rect* rects, int count) @extern("SDL_RenderDrawRects");
-fn int renderFillRect(Renderer* renderer, Rect rect) @extern("SDL_RenderFillRect");
+fn int renderFillRect(Renderer* renderer, Rect* rect) @extern("SDL_RenderFillRect");
 fn int renderFillRects(Renderer* renderer, Rect* rects, int count) @extern("SDL_RenderFillRects");
 fn int renderCopy(Renderer* renderer, Texture* texture, Rect* srcrect, Rect* dstrect) @extern("SDL_RenderCopy");
 fn int renderCopyEx(Renderer* renderer, Texture* texture, Rect* srcrect, Rect* dstrect, double angle, Point* center, RendererFlip flip) @extern("SDL_RenderCopyEx");
