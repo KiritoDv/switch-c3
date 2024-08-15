@@ -1,0 +1,9 @@
+.idea/
+build*/
+.cache/
+imgui.ini
+.vscode
+*.DS_Store
+cmake-build-*
+switch-c3.*
+nswitch.h
